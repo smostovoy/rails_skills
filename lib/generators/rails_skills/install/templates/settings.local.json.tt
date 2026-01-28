@@ -1,0 +1,11 @@
+{
+  "skills": {
+    "autoLoad": true,
+    "path": ".claude/skills"
+  },
+  "agents": {
+    "path": ".claude/agents"
+  },
+  "project": "<%= app_name %>",
+  "rails_version": "<%= rails_version %>"
+}

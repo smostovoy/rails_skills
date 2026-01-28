@@ -1,0 +1,29 @@
+---
+name: <%= file_name %>
+description: <%= skill_description %>
+version: 1.0.0
+---
+
+# <%= file_name.tr('-', ' ').split.map(&:capitalize).join(' ') %>
+
+## Quick Reference
+
+| Command | Purpose |
+|---------|---------|
+| TODO    | Add commands here |
+
+## Overview
+
+<%= skill_description %>
+
+## Usage
+
+Add usage examples and patterns here.
+
+## Common Patterns
+
+Add frequently used code patterns here.
+
+## Best Practices
+
+Add best practices and conventions here.
