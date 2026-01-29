@@ -44,8 +44,9 @@ module RailsSkills
         # stack - ruby skill
         install_skill("stack/ruby")
 
-        # workflows - commit skill
+        # workflows - commit and cli skills
         install_skill("workflows/commit")
+        install_skill("workflows/cli")
       end
 
       def install_rules_and_commands
@@ -66,7 +67,7 @@ module RailsSkills
         say "  skills/"
         say "    domains/       <- domain-specific skills"
         say "    stack/         <- technology stack skills (ruby)"
-        say "    workflows/     <- workflow skills (commit)"
+        say "    workflows/     <- workflow skills (commit, cli)"
         say "  .claude/skills   -> ../skills (symlink)"
         say "  .codex/skills    -> ../skills (symlink)"
         say ""
