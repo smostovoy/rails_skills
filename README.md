@@ -37,7 +37,9 @@ your_rails_app/
 │   │   └── ruby/
 │   │       └── SKILL.md
 │   └── workflows/             # Workflow skills
-│       └── commit/
+│       ├── commit/
+│       │   └── SKILL.md
+│       └── cli/
 │           └── SKILL.md
 ├── .claude/
 │   ├── skills -> ../skills    # Symlink to shared skills
@@ -57,7 +59,7 @@ Both Claude and Codex read from the same `skills/` directory via symlinks.
 |----------|---------|---------|
 | **domains/** | Business domain knowledge | `domains/payments`, `domains/auth` |
 | **stack/** | Technology stack skills | `stack/ruby`, `stack/postgres` |
-| **workflows/** | Development workflows | `workflows/commit`, `workflows/deploy` |
+| **workflows/** | Development workflows | `workflows/commit`, `workflows/cli` |
 
 ### Create a custom skill
 
@@ -75,6 +77,7 @@ The gem ships with these pre-built skills:
 
 - **stack/ruby** - Ruby language patterns, idioms, and best practices
 - **workflows/commit** - Git commit workflow and conventions
+- **workflows/cli** - Command-line workflows for Rails development
 
 ## How It Works
 
