@@ -3,7 +3,7 @@
 A Ruby gem that organizes your knowledge base into AI skills shared between **your team**, **Claude** and **Codex**.
 
 # Structure
-It introduces additional layer on top of MVC - intelligence layer. This layer is optimazied for reading by both humans and machines.
+It introduces additional layer on top of MVC - intelligence layer. This layer is optimised for reading by both humans and machines.
 Next structure is default:
 | Category | Purpose | Example |
 |----------|---------|---------|
