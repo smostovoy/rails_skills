@@ -28,7 +28,7 @@ module RailsSkills
       end
 
       def show_instructions
-        say "\nSkill '#{file_name}' created in #{skill_path}/", :green
+        say "\nSkill '#{skill_name}' created in #{skill_path}/", :green
         say "This skill is available to both Claude and Codex via symlinks.", :blue
       end
 
@@ -38,8 +38,12 @@ module RailsSkills
         "skills/#{file_name}"
       end
 
+      def skill_name
+        file_name.split("/").last
+      end
+
       def skill_description
-        options[:description] || "Custom skill for #{file_name.tr('-', ' ')}"
+        options[:description] || "Custom skill for #{skill_name.tr('-', ' ')}"
       end
     end
   end

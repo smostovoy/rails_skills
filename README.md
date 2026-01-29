@@ -20,18 +20,10 @@ bundle install
 
 ## Usage
 
-### Install with default (basic) preset
+### Install
 
 ```bash
 rails generate rails_skills:install
-```
-
-### Install with a preset
-
-```bash
-rails generate rails_skills:install --preset=basic
-rails generate rails_skills:install --preset=fullstack
-rails generate rails_skills:install --preset=api
 ```
 
 ### What it creates
@@ -39,12 +31,14 @@ rails generate rails_skills:install --preset=api
 ```
 your_rails_app/
 ├── skills/                    # Shared AI skill files (canonical location)
-│   ├── rails-models/
-│   │   └── SKILL.md
-│   ├── rails-controllers/
-│   │   └── SKILL.md
-│   └── rails-views/
-│       └── SKILL.md
+│   ├── domains/               # Domain-specific skills
+│   │   └── .keep
+│   ├── stack/                 # Technology stack skills
+│   │   └── ruby/
+│   │       └── SKILL.md
+│   └── workflows/             # Workflow skills
+│       └── commit/
+│           └── SKILL.md
 ├── .claude/
 │   ├── skills -> ../skills    # Symlink to shared skills
 │   ├── agents/
@@ -57,35 +51,30 @@ your_rails_app/
 
 Both Claude and Codex read from the same `skills/` directory via symlinks.
 
-### Presets
+### Skill Categories
 
-| Preset | Skills included |
-|--------|----------------|
-| **basic** | rails-models, rails-controllers, rails-views |
-| **fullstack** | basic + rails-hotwire, rspec-testing |
-| **api** | rails-models, rails-api-controllers, rspec-testing |
+| Category | Purpose | Example |
+|----------|---------|---------|
+| **domains/** | Business domain knowledge | `domains/payments`, `domains/auth` |
+| **stack/** | Technology stack skills | `stack/ruby`, `stack/postgres` |
+| **workflows/** | Development workflows | `workflows/commit`, `workflows/deploy` |
 
 ### Create a custom skill
 
 ```bash
-rails generate rails_skills:skill my_custom_skill
-rails generate rails_skills:skill my_custom_skill --description="My skill description"
-rails generate rails_skills:skill my_custom_skill --with-references
+rails generate rails_skills:skill domains/payments
+rails generate rails_skills:skill stack/postgres
+rails generate rails_skills:skill workflows/deploy --description="Deployment workflow"
 ```
 
 Skills are created in `skills/` and automatically available to both Claude and Codex.
 
-## Skill Library
+## Default Skills
 
 The gem ships with these pre-built skills:
 
-- **rails-models** - ActiveRecord patterns, migrations, validations, associations
-- **rails-controllers** - Controller actions, routing, REST conventions, filters
-- **rails-views** - ERB templates, layouts, partials, forms, helpers
-- **rails-hotwire** - Turbo Drive, Turbo Frames, Turbo Streams, Stimulus
-- **rails-api-controllers** - API-only controllers, serialization, versioning
-- **rspec-testing** - RSpec patterns for models, requests, and system tests
-- **rails-jobs** - Active Job patterns, background processing
+- **stack/ruby** - Ruby language patterns, idioms, and best practices
+- **workflows/commit** - Git commit workflow and conventions
 
 ## How It Works
 

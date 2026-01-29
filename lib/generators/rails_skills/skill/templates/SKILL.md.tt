@@ -1,10 +1,10 @@
 ---
-name: <%= file_name %>
+name: <%= skill_name %>
 description: <%= skill_description %>
 version: 1.0.0
 ---
 
-# <%= file_name.tr('-', ' ').split.map(&:capitalize).join(' ') %>
+# <%= skill_name.tr('-', ' ').split.map(&:capitalize).join(' ') %>
 
 ## Quick Reference
 
