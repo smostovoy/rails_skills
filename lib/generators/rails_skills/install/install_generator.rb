@@ -15,7 +15,7 @@ module RailsSkills
 
       def create_skills_directory
         empty_directory RailsSkills::SKILLS_DIR
-        RailsSkills::CATEGORIES.each do |category|
+        RailsSkills::DEFAULT_CATEGORIES.each do |category|
           empty_directory "#{RailsSkills::SKILLS_DIR}/#{category}"
         end
       end
@@ -60,10 +60,12 @@ module RailsSkills
 
       def link_skills
         skills_root = File.join(destination_root, RailsSkills::SKILLS_DIR)
+        return unless File.directory?(skills_root)
 
-        RailsSkills::CATEGORIES.each do |category|
+        Dir.children(skills_root).sort.each do |category|
           category_dir = File.join(skills_root, category)
           next unless File.directory?(category_dir)
+          next if category.start_with?(".")
 
           Dir.children(category_dir).sort.each do |name|
             next unless File.directory?(File.join(category_dir, name))
@@ -108,6 +110,7 @@ module RailsSkills
         say "  rails g rails_skills:skill services/payments    # Create a service skill"
         say "  rails g rails_skills:skill stack/postgres      # Create a stack skill"
         say "  rails g rails_skills:skill workflows/deploy    # Create a workflow skill"
+        say "  rails g rails_skills:skill my_folder/my_skill  # Custom folders work too"
         say ""
       end
 

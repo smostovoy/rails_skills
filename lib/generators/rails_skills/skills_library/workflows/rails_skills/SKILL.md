@@ -13,6 +13,7 @@ description: How to manage AI skills with the rails_skills gem
 | `rails g rails_skills:skill services/NAME` | Create a service skill |
 | `rails g rails_skills:skill stack/NAME` | Create a stack skill |
 | `rails g rails_skills:skill workflows/NAME` | Create a workflow skill |
+| `rails g rails_skills:skill FOLDER/NAME` | Any custom folder works |
 
 ## Directory Structure
 
@@ -31,11 +32,14 @@ Skills are organized by category in `skills/` but flattened when symlinked. `ski
 
 ## Categories
 
+Any folder under `skills/` is a category. The gem scaffolds three defaults but you can create your own:
+
 | Category | Use for | Examples |
 |----------|---------|----------|
 | **services/** | Business logic, bounded contexts | `services/payments`, `services/auth`, `services/billing` |
 | **stack/** | Languages, frameworks, databases | `stack/ruby`, `stack/postgres`, `stack/redis` |
 | **workflows/** | Dev processes, CI/CD, conventions | `workflows/commit`, `workflows/deploy`, `workflows/review` |
+| **your_folder/** | Anything you need | `your_folder/my_skill` |
 
 ## Creating Skills
 

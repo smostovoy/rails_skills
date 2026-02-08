@@ -4,12 +4,13 @@ A Ruby gem that organizes your knowledge base into AI skills shared between **yo
 
 # Structure
 It introduces additional layer on top of MVC - intelligence layer. This layer is optimised for reading by both humans and machines.
-Next structure is default:
+The gem scaffolds three default categories but any folder under `skills/` is automatically discovered and symlinked:
 | Category | Purpose | Example |
 |----------|---------|---------|
 | **services/** | Business service skills | `services/payments`, `services/auth` |
 | **stack/** | Technology stack skills | `stack/ruby`, `stack/postgres` |
-| **workflows/** | Development workflows | `workflows/commit`, `workflows/deploy` |
+| **workflows/** | Development workflows and guides | `workflows/commit`, `workflows/deploy` |
+| **your_folder/** | Any custom category you create | `your_folder/my_skill` |
 
 ## Usage
 
@@ -32,7 +33,7 @@ your_rails_app/
 │   ├── stack/                 # Technology stack skills
 │   │   └── ruby/
 │   │       └── SKILL.md
-│   └── workflows/             # Workflow skills
+│   └── workflows/             # Workflows and guides
 │       ├── commit/
 │       │   └── SKILL.md
 │       └── rails_skills/
@@ -61,6 +62,7 @@ Skills are organized by category in `skills/` but flattened when symlinked into 
 rails generate rails_skills:skill services/payments
 rails generate rails_skills:skill stack/postgres
 rails generate rails_skills:skill workflows/deploy --description="Deployment workflow"
+rails generate rails_skills:skill my_folder/my_skill  # custom folders work too
 ```
 
 Skills are created in `skills/` and automatically symlinked (flattened) into both `.claude/skills` and `.codex/skills`.
@@ -87,7 +89,7 @@ skills/stack/ruby          →  .claude/skills/stack/ruby    (NOT discovered)
 
 ## How It Works
 
-1. `skills/` is the single source of truth, organized by category (`services/`, `stack/`, `workflows/`)
+1. `skills/` is the single source of truth — any subfolder is a category
 2. Claude and Codex require a flat skills directory — nested paths are not loaded
 3. The gem creates flattened symlinks: `skills/stack/ruby` → `.claude/skills/ruby`
 4. Edit skills in `skills/` and both AI tools see the changes immediately
