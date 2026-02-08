@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_skills (0.4.1)
+    rails_skills (0.5.0)
       rails (>= 7.0)
 
 GEM
@@ -238,4 +238,4 @@ DEPENDENCIES
   rspec (~> 3.0)
 
 BUNDLED WITH
-   2.6.1
+   2.4.13
