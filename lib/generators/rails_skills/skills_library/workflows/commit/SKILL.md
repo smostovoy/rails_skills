@@ -7,7 +7,7 @@ description: Git commit workflow and conventions
 
 1. **Check status**: `git status`
 2. **Review changes**: `git diff`
-3. **Analyze missing docs/skills** - If you see changes to domains listed in skills/domains - review the need to update the skill doc
+3. **Analyze missing docs/skills** - If you see changes to services listed in skills/services - review the need to update the skill doc
 3. **Stage files**: `git add <files>` (prefer specific files over `-A`)
 4. **Commit**: `git commit -m "type: message"`
 5. **Push**: Push only if explicitly asked so, use `git push origin {current branch}`

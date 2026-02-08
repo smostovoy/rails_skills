@@ -7,7 +7,7 @@ It introduces additional layer on top of MVC - intelligence layer. This layer is
 Next structure is default:
 | Category | Purpose | Example |
 |----------|---------|---------|
-| **domains/** | Business domain knowledge | `domains/payments`, `domains/auth` |
+| **services/** | Business service skills | `services/payments`, `services/auth` |
 | **stack/** | Technology stack skills | `stack/ruby`, `stack/postgres` |
 | **workflows/** | Development workflows | `workflows/commit`, `workflows/deploy` |
 
@@ -27,7 +27,7 @@ rails generate rails_skills:install
 ```
 your_rails_app/
 ├── skills/                    # Shared AI skill files (canonical location)
-│   ├── domains/               # Domain-specific skills
+│   ├── services/               # Domain-specific skills
 │   │   └── .keep
 │   ├── stack/                 # Technology stack skills
 │   │   └── ruby/
@@ -58,7 +58,7 @@ Skills are organized by category in `skills/` but flattened when symlinked into 
 ### Create a custom skill
 
 ```bash
-rails generate rails_skills:skill domains/payments
+rails generate rails_skills:skill services/payments
 rails generate rails_skills:skill stack/postgres
 rails generate rails_skills:skill workflows/deploy --description="Deployment workflow"
 ```
@@ -87,7 +87,7 @@ skills/stack/ruby          →  .claude/skills/stack/ruby    (NOT discovered)
 
 ## How It Works
 
-1. `skills/` is the single source of truth, organized by category (`domains/`, `stack/`, `workflows/`)
+1. `skills/` is the single source of truth, organized by category (`services/`, `stack/`, `workflows/`)
 2. Claude and Codex require a flat skills directory — nested paths are not loaded
 3. The gem creates flattened symlinks: `skills/stack/ruby` → `.claude/skills/ruby`
 4. Edit skills in `skills/` and both AI tools see the changes immediately

@@ -10,7 +10,7 @@ description: How to manage AI skills with the rails_skills gem
 | Command | Purpose |
 |---------|---------|
 | `rails g rails_skills:install` | Install skills directory and symlinks |
-| `rails g rails_skills:skill domains/NAME` | Create a domain skill |
+| `rails g rails_skills:skill services/NAME` | Create a service skill |
 | `rails g rails_skills:skill stack/NAME` | Create a stack skill |
 | `rails g rails_skills:skill workflows/NAME` | Create a workflow skill |
 
@@ -18,7 +18,7 @@ description: How to manage AI skills with the rails_skills gem
 
 ```
 skills/                        # Canonical location — edit skills here
-  domains/                     # Business domain knowledge
+  services/                     # Business service knowledge
   stack/                       # Technology stack skills
   workflows/                   # Development workflow skills
 .claude/skills/                # Flattened symlinks (auto-managed)
@@ -33,7 +33,7 @@ Skills are organized by category in `skills/` but flattened when symlinked. `ski
 
 | Category | Use for | Examples |
 |----------|---------|----------|
-| **domains/** | Business logic, bounded contexts | `domains/payments`, `domains/auth`, `domains/billing` |
+| **services/** | Business logic, bounded contexts | `services/payments`, `services/auth`, `services/billing` |
 | **stack/** | Languages, frameworks, databases | `stack/ruby`, `stack/postgres`, `stack/redis` |
 | **workflows/** | Dev processes, CI/CD, conventions | `workflows/commit`, `workflows/deploy`, `workflows/review` |
 
@@ -44,7 +44,7 @@ Skills are organized by category in `skills/` but flattened when symlinked. `ski
 rails g rails_skills:skill stack/postgres
 
 # With custom description
-rails g rails_skills:skill domains/payments --description="Payment processing patterns"
+rails g rails_skills:skill services/payments --description="Payment processing patterns"
 
 # With references directory for supplementary files
 rails g rails_skills:skill stack/redis --with-references
@@ -81,6 +81,6 @@ Conventions and guidelines.
 1. One skill per concept — keep skills focused and single-purpose
 2. Use quick reference tables for scannable lookup
 3. Include real code examples over abstract descriptions
-4. Put domain skills close to the business language your team uses
+4. Put service skills close to the business language your team uses
 5. Update skills when patterns evolve — they are living documentation
 6. Skills are shared between Claude and Codex — write for both audiences

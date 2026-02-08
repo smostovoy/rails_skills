@@ -47,8 +47,8 @@ module RailsSkills
       end
 
       def install_default_skills
-        # domains - empty with .keep
-        install_skill_folder("domains")
+        # services - empty with .keep
+        install_skill_folder("services")
 
         # stack - ruby skill
         install_skill("stack/ruby")
@@ -92,7 +92,7 @@ module RailsSkills
         say ""
         say "Directory structure:", :yellow
         say "  skills/"
-        say "    domains/       <- domain-specific skills"
+        say "    services/      <- service-specific skills"
         say "    stack/         <- technology stack skills (ruby)"
         say "    workflows/     <- workflow skills (commit)"
         RailsSkills::SKILL_TARGETS.each do |target|
@@ -105,7 +105,7 @@ module RailsSkills
         say "Skills are flattened into #{RailsSkills::SKILL_TARGETS.join(' and ')}", :blue
         say ""
         say "Next steps:", :yellow
-        say "  rails g rails_skills:skill domains/my_domain   # Create a domain skill"
+        say "  rails g rails_skills:skill services/payments    # Create a service skill"
         say "  rails g rails_skills:skill stack/postgres      # Create a stack skill"
         say "  rails g rails_skills:skill workflows/deploy    # Create a workflow skill"
         say ""

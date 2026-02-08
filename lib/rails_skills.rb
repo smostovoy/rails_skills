@@ -9,6 +9,6 @@ module RailsSkills
   SKILLS_DIR = "skills"
   CLAUDE_DIR = ".claude"
   CODEX_DIR = ".codex"
-  CATEGORIES = %w[domains stack workflows].freeze
+  CATEGORIES = %w[services stack workflows].freeze
   SKILL_TARGETS = ["#{CLAUDE_DIR}/skills", "#{CODEX_DIR}/skills"].freeze
 end
