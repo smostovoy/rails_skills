@@ -73,11 +73,23 @@ The gem ships with these pre-built skills:
 - **workflows/commit** - Git commit workflow to automatically update documentation on each commit
 - **workflows/rails_skills** - How to manage AI skills with the rails_skills gem
 
+## Why Flattened Symlinks?
+
+Claude and Codex only load skills from a single flat directory — they do not support nested subdirectories inside their skills path. A skill at `.claude/skills/stack/ruby` would not be discovered.
+
+RailsSkills solves this by keeping a clean categorized structure in `skills/` for humans, while creating flattened symlinks in `.claude/skills/` and `.codex/skills/` so the AI tools can find every skill:
+
+```
+skills/stack/ruby          →  .claude/skills/ruby          (discovered)
+skills/workflows/commit    →  .claude/skills/commit        (discovered)
+skills/stack/ruby          →  .claude/skills/stack/ruby    (NOT discovered)
+```
+
 ## How It Works
 
 1. `skills/` is the single source of truth, organized by category (`domains/`, `stack/`, `workflows/`)
-2. `.claude/skills/` and `.codex/skills/` contain flattened symlinks — each skill is linked directly without the category prefix
-3. `skills/stack/ruby` → `.claude/skills/ruby` and `.codex/skills/ruby`
+2. Claude and Codex require a flat skills directory — nested paths are not loaded
+3. The gem creates flattened symlinks: `skills/stack/ruby` → `.claude/skills/ruby`
 4. Edit skills in `skills/` and both AI tools see the changes immediately
 5. New skills created via the generator are automatically symlinked
 
