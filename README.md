@@ -10,7 +10,7 @@ Main features:
 * Validates skills on CI or locally. 
 
 # Structure
-It introduces additional layer on top of MVC - intelligence layer. This layer is optimised for reading by both humans and machines.
+It introduces additional layer on top of MVC - intelligence layer. This layer is optimised for reading by both humans and agents.
 The gem scaffolds three default categories but any folder under `skills/` is automatically discovered and symlinked:
 | Category | Purpose | Example |
 |----------|---------|---------|
