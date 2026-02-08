@@ -1,5 +1,8 @@
 # Rails Skills
 
+[![Gem Version](https://badge.fury.io/rb/rails_skills.svg)](https://badge.fury.io/rb/rails_skills)
+[![CI](https://github.com/smostovoy/rails_skills/actions/workflows/ci.yml/badge.svg)](https://github.com/smostovoy/rails_skills/actions/workflows/ci.yml)
+
 A Ruby gem that organizes your knowledge base into AI skills shared between **Humans**, **Claude** and **Codex**.
 Main features:
 * Organizes all your docs into a format that can be used by Agents - Agent Skills. Read here for [claude](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) and [codex](https://developers.openai.com/codex/skills/)
