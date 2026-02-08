@@ -1,6 +1,10 @@
-# rails_skills
+# Rails Skills
 
-A Ruby gem that organizes your knowledge base into AI skills shared between **your team**, **Claude** and **Codex**.
+A Ruby gem that organizes your knowledge base into AI skills shared between **Humans**, **Claude** and **Codex**.
+Main features:
+* Organizes all your docs into a format that can be used by Agents - Agent Skills. Read here for [claude](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) and [codex](https://developers.openai.com/codex/skills/)
+* Auto-updated docs and guides. If your team or agents will trigger commit from an agent chat then a `workflow/commit` Skill will be triggered and it will check diff for a need to update skills (docs)
+* Validate skills on CI or locally. 
 
 # Structure
 It introduces additional layer on top of MVC - intelligence layer. This layer is optimised for reading by both humans and machines.
@@ -39,14 +43,11 @@ your_rails_app/
 │       └── rails_skills/
 │           └── SKILL.md
 ├── .claude/
-│   ├── skills/                # Flattened symlinks
-│   │   ├── ruby -> ../../skills/stack/ruby
-│   │   ├── commit -> ../../skills/workflows/commit
-│   │   └── rails_skills -> ../../skills/workflows/rails_skills
-│   ├── agents/
-│   ├── commands/
-│   ├── rules/
-│   └── settings.local.json
+│   └── skills/                # Flattened symlinks
+│       ├── ruby -> ../../skills/stack/ruby
+│       ├── commit -> ../../skills/workflows/commit
+│       └── rails_skills -> ../../skills/workflows/rails_skills
+
 └── .codex/
     └── skills/                # Flattened symlinks
         ├── ruby -> ../../skills/stack/ruby
@@ -54,7 +55,7 @@ your_rails_app/
         └── rails_skills -> ../../skills/workflows/rails_skills
 ```
 
-Skills are organized by category in `skills/` but flattened when symlinked into `.claude/skills` and `.codex/skills`. For example, `skills/stack/ruby` becomes `.claude/skills/ruby`.
+Skills are organized by category in `skills/` but flattened when symlinked into `.claude/skills` and `.codex/skills`, because nested dirs are not supported by Claud and Codex. 
 
 ### Create a custom skill
 
@@ -71,21 +72,9 @@ Skills are created in `skills/` and automatically symlinked (flattened) into bot
 
 The gem ships with these pre-built skills:
 
-- **stack/ruby** - Ruby language patterns, idioms, and best practices
+- **stack/ruby** - Ruby language patterns, idioms, and best practices. You can reference Rubocop here. 
 - **workflows/commit** - Git commit workflow to automatically update documentation on each commit
 - **workflows/rails_skills** - How to manage AI skills with the rails_skills gem
-
-## Why Flattened Symlinks?
-
-Claude and Codex only load skills from a single flat directory — they do not support nested subdirectories inside their skills path. A skill at `.claude/skills/stack/ruby` would not be discovered.
-
-RailsSkills solves this by keeping a clean categorized structure in `skills/` for humans, while creating flattened symlinks in `.claude/skills/` and `.codex/skills/` so the AI tools can find every skill:
-
-```
-skills/stack/ruby          →  .claude/skills/ruby          (discovered)
-skills/workflows/commit    →  .claude/skills/commit        (discovered)
-skills/stack/ruby          →  .claude/skills/stack/ruby    (NOT discovered)
-```
 
 ## How It Works
 
