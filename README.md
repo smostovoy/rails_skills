@@ -76,7 +76,7 @@ Skills are created in `skills/` and automatically symlinked (flattened) into bot
 The gem ships with these default skills:
 
 - **stack/ruby** - Ruby language patterns, idioms, and best practices. You can reference Rubocop here.
-- **stack/rails_skills** - How to manage AI skills with the rails_skills gem.
+- **stack/rails_skills** - How to manage skills with the rails_skills gem.
 - **workflows/commit** - Git commit workflow to automatically update documentation on each commit.
 
 ## How It Works
