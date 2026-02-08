@@ -6,7 +6,7 @@
 A Ruby gem that organizes your knowledge base into AI skills shared between **Humans**, **Claude** and **Codex**.
 Main features:
 * Organizes all your docs into a format that can be used by Agents - Agent Skills. Read here for [claude](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) and [codex](https://developers.openai.com/codex/skills/)
-* Auto-updated docs and guides. If your team or agents will trigger commit from an agent chat then a `workflow/commit` Skill will be triggered and it will check diff for a need to update skills (docs)
+* Auto-updated docs and guides. If your team or agents trigger a commit from an agent chat, then the `workflows/commit` skill is triggered to check diffs for needed skill updates.
 * Validate skills on CI or locally. 
 
 # Structure
@@ -37,12 +37,12 @@ your_rails_app/
 ├── skills/                    # Shared AI skill files (canonical location)
 │   ├── services/               # Domain-specific skills
 │   │   └── .keep
-│   ├── stack/                 # Technology stack skills
+│   ├── stack/                 # Technology stack skills (ruby, rails_skills)
 │   │   ├── ruby/
 │   │   │   └── SKILL.md
 │   │   └── rails_skills/
 │   │       └── SKILL.md
-│   └── workflows/             # Workflows and guides
+│   └── workflows/             # Workflows and guides (commit)
 │       └── commit/
 │           └── SKILL.md
 ├── .claude/
@@ -58,7 +58,7 @@ your_rails_app/
         └── rails_skills -> ../../skills/stack/rails_skills
 ```
 
-Skills are organized by category in `skills/` but flattened when symlinked into `.claude/skills` and `.codex/skills`, because nested dirs are not supported by Claud and Codex. 
+Skills are organized by category in `skills/` but flattened when symlinked into `.claude/skills` and `.codex/skills`, because nested dirs are not supported by Claude and Codex.
 
 ### Create a custom skill
 
