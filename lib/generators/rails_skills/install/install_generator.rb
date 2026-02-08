@@ -32,7 +32,14 @@ module RailsSkills
       end
 
       def create_skills_targets
-        RailsSkills::SKILL_TARGETS.each { |target| empty_directory target }
+        RailsSkills::SKILL_TARGETS.each do |target|
+          dest = File.join(destination_root, target)
+          if File.symlink?(dest)
+            File.delete(dest)
+            say_status :remove, "#{target} (old symlink)", :yellow
+          end
+          empty_directory target
+        end
       end
 
       def copy_claude_settings
