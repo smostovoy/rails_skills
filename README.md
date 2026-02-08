@@ -95,6 +95,31 @@ skills/stack/ruby          →  .claude/skills/stack/ruby    (NOT discovered)
 4. Edit skills in `skills/` and both AI tools see the changes immediately
 5. New skills created via the generator are automatically symlinked
 
+## CI and Validation
+
+Every `SKILL.md` must include YAML frontmatter with `name` and `description` keys:
+
+```markdown
+---
+name: my-skill
+description: What this skill teaches
+---
+```
+
+Validate all skills locally:
+
+```bash
+bin/rails rails_skills:validate
+```
+
+Add the task to your CI pipeline to catch missing or malformed frontmatter:
+
+```yaml
+# .github/workflows/ci.yml
+- name: Validate skills
+  run: bin/rails rails_skills:validate
+```
+
 ## License
 
 MIT License. See [LICENSE](LICENSE) for details.

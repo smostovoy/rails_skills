@@ -14,6 +14,7 @@ description: How to manage AI skills with the rails_skills gem
 | `rails g rails_skills:skill stack/NAME` | Create a stack skill |
 | `rails g rails_skills:skill workflows/NAME` | Create a workflow skill |
 | `rails g rails_skills:skill FOLDER/NAME` | Any custom folder works |
+| `bin/rails rails_skills:validate` | Validate all SKILL.md frontmatter |
 
 ## Directory Structure
 
@@ -79,6 +80,24 @@ Code examples and patterns.
 ## Best Practices
 Conventions and guidelines.
 ```
+
+## CI and Validation
+
+Validate all `SKILL.md` frontmatter locally:
+
+```bash
+bin/rails rails_skills:validate
+```
+
+Add to your CI pipeline:
+
+```yaml
+# .github/workflows/ci.yml
+- name: Validate skills
+  run: bin/rails rails_skills:validate
+```
+
+The validator checks that every `SKILL.md` has YAML frontmatter with required `name` and `description` keys. The task exits non-zero on failure, so it will fail your CI build if any skill is invalid.
 
 ## Best Practices
 
