@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.email = ["sergii.mostovyi@gmail.com"]
 
   spec.summary = "Organize AI skills for Rails projects, shared between Claude and Codex"
-  spec.description = "Creates a skills/ directory in your Rails root with AI skill definitions, " \
-                     "then symlinks it to .claude and .codex so both AI assistants share the same knowledge base."
+  spec.description = "Creates a skills/ directory in your Rails root with symlinks to .claude and .codex " \
+                     "so your Human team and both AI assistants share the same knowledge base."
   spec.homepage = "https://github.com/smostovoy/rails_skills"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
