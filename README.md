@@ -64,9 +64,6 @@ Skills are organized by category in `skills/` but flattened when symlinked into 
 
 ```bash
 rails generate rails_skills:skill services/payments
-rails generate rails_skills:skill stack/postgres
-rails generate rails_skills:skill workflows/deploy --description="Deployment workflow"
-rails generate rails_skills:skill my_folder/my_skill  # custom folders work too
 ```
 
 Skills are created in `skills/` and automatically symlinked (flattened) into both `.claude/skills` and `.codex/skills`.
@@ -77,7 +74,7 @@ The gem ships with these default skills:
 
 - **stack/ruby** - Ruby language patterns, idioms, and best practices. You can reference Rubocop here.
 - **stack/rails_skills** - How to manage skills with the rails_skills gem.
-- **workflows/commit** - Git commit workflow to automatically update documentation on each commit.
+- **workflows/commit** - Git commit workflow to automatically update documentation (skills) on each commit.
 
 ## How It Works
 
