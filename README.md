@@ -14,8 +14,8 @@ It introduces additional layer on top of MVC - intelligence layer. This layer is
 The gem scaffolds three default categories but any folder under `skills/` is automatically discovered and symlinked:
 | Category | Purpose | Example |
 |----------|---------|---------|
-| **services/** | Business service skills | `services/payments`, `services/auth` |
-| **stack/** | Technology stack skills | `stack/ruby`, `stack/postgres` |
+| **services/** | Docs on services, domains | `services/payments`, `services/auth` |
+| **stack/** | Docs on how to use dependencies, protocols etc| `stack/ruby`, `stack/postgres` |
 | **workflows/** | Development workflows and guides | `workflows/commit`, `workflows/deploy` |
 | **your_folder/** | Any custom category you create | `your_folder/my_skill` |
 
