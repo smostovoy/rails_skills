@@ -50,12 +50,12 @@ module RailsSkills
         # services - empty with .keep
         install_skill_folder("services")
 
-        # stack - ruby skill
+        # stack - ruby, rails_skills skills
         install_skill("stack/ruby")
+        install_skill("stack/rails_skills")
 
-        # workflows - commit, rails_skills skills
+        # workflows - commit skill
         install_skill("workflows/commit")
-        install_skill("workflows/rails_skills")
       end
 
       def link_skills
@@ -101,7 +101,7 @@ module RailsSkills
           say "  #{target}/"
           say "    ruby/          -> ../../skills/stack/ruby"
           say "    commit/        -> ../../skills/workflows/commit"
-          say "    rails_skills/  -> ../../skills/workflows/rails_skills"
+          say "    rails_skills/  -> ../../skills/stack/rails_skills"
         end
         say ""
         say "Skills are flattened into #{RailsSkills::SKILL_TARGETS.join(' and ')}", :blue

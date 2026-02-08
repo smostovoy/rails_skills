@@ -38,24 +38,24 @@ your_rails_app/
 │   ├── services/               # Domain-specific skills
 │   │   └── .keep
 │   ├── stack/                 # Technology stack skills
-│   │   └── ruby/
+│   │   ├── ruby/
+│   │   │   └── SKILL.md
+│   │   └── rails_skills/
 │   │       └── SKILL.md
 │   └── workflows/             # Workflows and guides
-│       ├── commit/
-│       │   └── SKILL.md
-│       └── rails_skills/
+│       └── commit/
 │           └── SKILL.md
 ├── .claude/
 │   └── skills/                # Flattened symlinks
 │       ├── ruby -> ../../skills/stack/ruby
 │       ├── commit -> ../../skills/workflows/commit
-│       └── rails_skills -> ../../skills/workflows/rails_skills
+│       └── rails_skills -> ../../skills/stack/rails_skills
 
 └── .codex/
     └── skills/                # Flattened symlinks
         ├── ruby -> ../../skills/stack/ruby
         ├── commit -> ../../skills/workflows/commit
-        └── rails_skills -> ../../skills/workflows/rails_skills
+        └── rails_skills -> ../../skills/stack/rails_skills
 ```
 
 Skills are organized by category in `skills/` but flattened when symlinked into `.claude/skills` and `.codex/skills`, because nested dirs are not supported by Claud and Codex. 
@@ -77,7 +77,7 @@ The gem ships with these pre-built skills:
 
 - **stack/ruby** - Ruby language patterns, idioms, and best practices. You can reference Rubocop here. 
 - **workflows/commit** - Git commit workflow to automatically update documentation on each commit
-- **workflows/rails_skills** - How to manage AI skills with the rails_skills gem
+- **stack/rails_skills** - How to manage AI skills with the rails_skills gem
 
 ## How It Works
 
