@@ -3,6 +3,7 @@
 namespace :rails_skills do
   desc "Validate YAML frontmatter in all SKILL.md files"
   task :validate do
+    require "rails_skills"
     require "rails_skills/skill_validator"
 
     skill_files = Dir.glob("#{RailsSkills::SKILLS_DIR}/**/SKILL.md")
