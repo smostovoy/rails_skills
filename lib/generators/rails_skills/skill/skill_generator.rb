@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 require "rails/generators"
+require_relative "../symlink_support"
 
 module RailsSkills
   module Generators
     class SkillGenerator < Rails::Generators::NamedBase
+      include SymlinkSupport
+
       source_root File.expand_path("templates", __dir__)
 
       class_option :description, type: :string, default: nil,
@@ -27,15 +30,20 @@ module RailsSkills
         create_file "#{skill_path}/references/.keep", ""
       end
 
+      def create_symlinks
+        create_skill_symlink(skill_name, skill_path)
+      end
+
       def show_instructions
+        targets = RailsSkills::SKILL_TARGETS.map { |t| "#{t}/#{skill_name}" }.join(" and ")
         say "\nSkill '#{skill_name}' created in #{skill_path}/", :green
-        say "This skill is available to both Claude and Codex via symlinks.", :blue
+        say "Symlinked to #{targets}", :blue
       end
 
       private
 
       def skill_path
-        "skills/#{file_name}"
+        "#{RailsSkills::SKILLS_DIR}/#{file_name}"
       end
 
       def skill_name

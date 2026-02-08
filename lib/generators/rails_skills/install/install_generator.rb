@@ -1,40 +1,42 @@
 # frozen_string_literal: true
 
 require "rails/generators"
+require_relative "../symlink_support"
 
 module RailsSkills
   module Generators
     class InstallGenerator < Rails::Generators::Base
+      include SymlinkSupport
+
       source_root File.expand_path("templates", __dir__)
 
       class_option :skip_agents, type: :boolean, default: false,
                                  desc: "Don't create default agents"
 
       def create_skills_directory
-        empty_directory "skills"
-        empty_directory "skills/domains"
-        empty_directory "skills/stack"
-        empty_directory "skills/workflows"
+        empty_directory RailsSkills::SKILLS_DIR
+        RailsSkills::CATEGORIES.each do |category|
+          empty_directory "#{RailsSkills::SKILLS_DIR}/#{category}"
+        end
       end
 
       def create_claude_directory
-        empty_directory ".claude"
-        empty_directory ".claude/commands"
-        empty_directory ".claude/rules"
-        empty_directory ".claude/agents" unless options[:skip_agents]
+        empty_directory RailsSkills::CLAUDE_DIR
+        empty_directory "#{RailsSkills::CLAUDE_DIR}/commands"
+        empty_directory "#{RailsSkills::CLAUDE_DIR}/rules"
+        empty_directory "#{RailsSkills::CLAUDE_DIR}/agents" unless options[:skip_agents]
       end
 
       def create_codex_directory
-        empty_directory ".codex"
+        empty_directory RailsSkills::CODEX_DIR
       end
 
-      def create_symlinks
-        create_symlink(".claude/skills", "../skills")
-        create_symlink(".codex/skills", "../skills")
+      def create_skills_targets
+        RailsSkills::SKILL_TARGETS.each { |target| empty_directory target }
       end
 
       def copy_claude_settings
-        template "settings.local.json.tt", ".claude/settings.local.json"
+        template "settings.local.json.tt", "#{RailsSkills::CLAUDE_DIR}/settings.local.json"
       end
 
       def install_default_skills
@@ -44,8 +46,25 @@ module RailsSkills
         # stack - ruby skill
         install_skill("stack/ruby")
 
-        # workflows - commit skill
+        # workflows - commit, rails_skills skills
         install_skill("workflows/commit")
+        install_skill("workflows/rails_skills")
+      end
+
+      def link_skills
+        skills_root = File.join(destination_root, RailsSkills::SKILLS_DIR)
+
+        RailsSkills::CATEGORIES.each do |category|
+          category_dir = File.join(skills_root, category)
+          next unless File.directory?(category_dir)
+
+          Dir.children(category_dir).sort.each do |name|
+            next unless File.directory?(File.join(category_dir, name))
+            next if name.start_with?(".")
+
+            create_skill_symlink(name, "#{RailsSkills::SKILLS_DIR}/#{category}/#{name}")
+          end
+        end
       end
 
       def install_rules_and_commands
@@ -55,7 +74,9 @@ module RailsSkills
       end
 
       def create_default_agent
-        template "agents/rails-developer.md.tt", ".claude/agents/rails-developer.md" unless options[:skip_agents]
+        return if options[:skip_agents]
+
+        template "agents/rails-developer.md.tt", "#{RailsSkills::CLAUDE_DIR}/agents/rails-developer.md"
       end
 
       def show_instructions
@@ -67,10 +88,14 @@ module RailsSkills
         say "    domains/       <- domain-specific skills"
         say "    stack/         <- technology stack skills (ruby)"
         say "    workflows/     <- workflow skills (commit)"
-        say "  .claude/skills   -> ../skills (symlink)"
-        say "  .codex/skills    -> ../skills (symlink)"
+        RailsSkills::SKILL_TARGETS.each do |target|
+          say "  #{target}/"
+          say "    ruby/          -> ../../skills/stack/ruby"
+          say "    commit/        -> ../../skills/workflows/commit"
+          say "    rails_skills/  -> ../../skills/workflows/rails_skills"
+        end
         say ""
-        say "Both Claude and Codex share skills from skills/", :blue
+        say "Skills are flattened into #{RailsSkills::SKILL_TARGETS.join(' and ')}", :blue
         say ""
         say "Next steps:", :yellow
         say "  rails g rails_skills:skill domains/my_domain   # Create a domain skill"
@@ -81,25 +106,15 @@ module RailsSkills
 
       private
 
-      def create_symlink(link_path, target)
-        dest = File.join(destination_root, link_path)
-        if File.symlink?(dest) || File.exist?(dest)
-          say_status :exist, link_path, :blue
-        else
-          File.symlink(target, dest)
-          say_status :symlink, "#{link_path} -> #{target}", :green
-        end
-      end
-
       def install_skill_folder(folder_name)
         skill_source = File.expand_path("../skills_library/#{folder_name}", __dir__)
         if File.directory?(skill_source)
-          directory skill_source, "skills/#{folder_name}"
+          directory skill_source, "#{RailsSkills::SKILLS_DIR}/#{folder_name}"
         end
       end
 
       def install_skill(skill_path)
-        skill_dir = "skills/#{skill_path}"
+        skill_dir = "#{RailsSkills::SKILLS_DIR}/#{skill_path}"
         empty_directory skill_dir
 
         skill_source = File.expand_path("../skills_library/#{skill_path}", __dir__)
@@ -111,7 +126,7 @@ module RailsSkills
       end
 
       def install_rule(rule_name)
-        rule_file = ".claude/rules/#{rule_name}.md"
+        rule_file = "#{RailsSkills::CLAUDE_DIR}/rules/#{rule_name}.md"
         rule_source = File.expand_path("../rules_library/#{rule_name}.md", __dir__)
 
         if File.exist?(rule_source)
@@ -122,7 +137,7 @@ module RailsSkills
       end
 
       def install_command(command_name)
-        command_file = ".claude/commands/#{command_name}.md"
+        command_file = "#{RailsSkills::CLAUDE_DIR}/commands/#{command_name}.md"
         command_source = File.expand_path("../commands_library/#{command_name}.md", __dir__)
 
         if File.exist?(command_source)
