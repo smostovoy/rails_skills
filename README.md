@@ -72,7 +72,7 @@ Skills are created in `skills/` and automatically symlinked (flattened) into bot
 
 The gem ships with these default skills:
 
-- **stack/rails** - Rails framework command workflows and project best practices.
+- **stack/rails** - Adds a `/rails` command to Agent CLI that is a smart proxy to `rails` CLI and references your rails best practices.
 - **stack/rails_skills** - How to manage skills with the rails_skills gem.
 - **workflows/commit** - Git commit workflow to automatically update documentation (skills) on each commit.
 
