@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/rails_skills.svg)](https://badge.fury.io/rb/rails_skills)
 [![CI](https://github.com/smostovoy/rails_skills/actions/workflows/ci.yml/badge.svg)](https://github.com/smostovoy/rails_skills/actions/workflows/ci.yml)
 
-Organize your docs into Skills shared between **Humans** and **Agents**.
+A Ruby gem to organize your docs as Skills shared between **Humans** and **Agents**, and keep them up-to-date automatically.
 Main features:
 * Organizes all your docs into a format that can be used by Claude Code and Codex - Agent Skills. Read here for [claude](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) and [codex](https://developers.openai.com/codex/skills/)
 * Auto-updates docs and guides. If your team or agents trigger a commit from an agent chat, then the `workflows/commit` skill is triggered and checks the diff for needed skill updates.
@@ -14,8 +14,8 @@ It introduces additional layer on top of MVC - intelligence layer. This layer is
 The gem scaffolds three default categories but any folder under `skills/` is automatically discovered and symlinked:
 | Category | Purpose | Example |
 |----------|---------|---------|
-| **services/** | Docs on services, domains | `services/payments`, `services/auth` |
-| **stack/** | Docs on how to use dependencies, protocols etc| `stack/ruby`, `stack/postgres` |
+| **services/** | Business service skills | `services/payments`, `services/auth` |
+| **stack/** | Technology stack skills | `stack/rails`, `stack/postgres` |
 | **workflows/** | Development workflows and guides | `workflows/commit`, `workflows/deploy` |
 | **your_folder/** | Any custom category you create | `your_folder/my_skill` |
 
@@ -37,8 +37,8 @@ your_rails_app/
 ├── skills/                    # Shared AI skill files (canonical location)
 │   ├── services/               # Domain-specific skills
 │   │   └── .keep
-│   ├── stack/                 # Technology stack skills (ruby, rails_skills)
-│   │   ├── ruby/
+│   ├── stack/                 # Technology stack skills (rails, rails_skills)
+│   │   ├── rails/
 │   │   │   └── SKILL.md
 │   │   └── rails_skills/
 │   │       └── SKILL.md
@@ -47,13 +47,13 @@ your_rails_app/
 │           └── SKILL.md
 ├── .claude/
 │   └── skills/                # Flattened symlinks
-│       ├── ruby -> ../../skills/stack/ruby
+│       ├── rails -> ../../skills/stack/rails
 │       ├── commit -> ../../skills/workflows/commit
 │       └── rails_skills -> ../../skills/stack/rails_skills
 
 └── .codex/
     └── skills/                # Flattened symlinks
-        ├── ruby -> ../../skills/stack/ruby
+        ├── rails -> ../../skills/stack/rails
         ├── commit -> ../../skills/workflows/commit
         └── rails_skills -> ../../skills/stack/rails_skills
 ```
@@ -72,7 +72,7 @@ Skills are created in `skills/` and automatically symlinked (flattened) into bot
 
 The gem ships with these default skills:
 
-- **stack/ruby** - Ruby language patterns, idioms, and best practices. You can reference Rubocop here.
+- **stack/rails** - Rails framework command workflows and project best practices.
 - **stack/rails_skills** - How to manage skills with the rails_skills gem.
 - **workflows/commit** - Git commit workflow to automatically update documentation (skills) on each commit.
 
@@ -80,7 +80,7 @@ The gem ships with these default skills:
 
 1. `skills/` is the single source of truth — any subfolder is a category
 2. Claude and Codex require a flat skills directory — nested paths are not loaded
-3. The gem creates flattened symlinks: `skills/stack/ruby` → `.claude/skills/ruby`
+3. The gem creates flattened symlinks: `skills/stack/rails` → `.claude/skills/rails`
 4. Edit skills in `skills/` and both AI tools see the changes immediately
 5. New skills created via the generator are automatically symlinked
 

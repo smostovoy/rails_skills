@@ -23,12 +23,12 @@ skills/                        # Canonical location — edit skills here
   stack/                       # Technology stack skills
   workflows/                   # Development workflow skills
 .claude/skills/                # Flattened symlinks (auto-managed)
-  ruby -> ../../skills/stack/ruby
+  rails -> ../../skills/stack/rails
   commit -> ../../skills/workflows/commit
 .codex/skills/                 # Flattened symlinks (auto-managed)
 ```
 
-Skills are organized by category in `skills/` but flattened when symlinked. `skills/stack/ruby` becomes `.claude/skills/ruby`.
+Skills are organized by category in `skills/` but flattened when symlinked. `skills/stack/rails` becomes `.claude/skills/rails`.
 
 ## Categories
 
@@ -37,7 +37,7 @@ Any folder under `skills/` is a category. The gem scaffolds three defaults but y
 | Category | Use for | Examples |
 |----------|---------|----------|
 | **services/** | Business logic, bounded contexts | `services/payments`, `services/auth`, `services/billing` |
-| **stack/** | Languages, frameworks, databases | `stack/ruby`, `stack/postgres`, `stack/redis` |
+| **stack/** | Languages, frameworks, databases | `stack/rails`, `stack/postgres`, `stack/redis` |
 | **workflows/** | Dev processes, CI/CD, conventions | `workflows/commit`, `workflows/deploy`, `workflows/review` |
 | **your_folder/** | Anything you need | `your_folder/my_skill` |
 
@@ -64,7 +64,6 @@ Each skill lives in its own directory with a `SKILL.md` file:
 ---
 name: skill_name
 description: What this skill teaches
-version: 1.0.0
 ---
 
 # Skill Name

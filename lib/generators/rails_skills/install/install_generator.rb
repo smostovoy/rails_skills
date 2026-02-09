@@ -50,8 +50,8 @@ module RailsSkills
         # services - empty with .keep
         install_skill_folder("services")
 
-        # stack - ruby, rails_skills skills
-        install_skill("stack/ruby")
+        # stack - rails, rails_skills skills
+        install_skill("stack/rails")
         install_skill("stack/rails_skills")
 
         # workflows - commit skill
@@ -95,11 +95,11 @@ module RailsSkills
         say "Directory structure:", :yellow
         say "  skills/"
         say "    services/      <- service-specific skills"
-        say "    stack/         <- technology stack skills (ruby)"
+        say "    stack/         <- technology stack skills (rails)"
         say "    workflows/     <- workflow skills (commit)"
         RailsSkills::SKILL_TARGETS.each do |target|
           say "  #{target}/"
-          say "    ruby/          -> ../../skills/stack/ruby"
+          say "    rails/         -> ../../skills/stack/rails"
           say "    commit/        -> ../../skills/workflows/commit"
           say "    rails_skills/  -> ../../skills/stack/rails_skills"
         end
