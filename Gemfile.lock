@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_skills (0.5.1)
+    rails_skills (0.5.2)
       rails (>= 7.0)
 
 GEM

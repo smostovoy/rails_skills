@@ -1,6 +1,6 @@
 ---
 name: rails_skills
-description: How to manage AI skills with the rails_skills gem
+description: Manage skills with the rails_skills gem. Use when asked to install skills, create/update/move a skill, validate SKILL.md frontmatter, run `rails g rails_skills:skill ...`, or map `/rails_skill create ...` shorthand to the proper Rails generator command.
 ---
 
 # Rails Skills
@@ -14,6 +14,7 @@ description: How to manage AI skills with the rails_skills gem
 | `rails g rails_skills:skill stack/NAME` | Create a stack skill |
 | `rails g rails_skills:skill workflows/NAME` | Create a workflow skill |
 | `rails g rails_skills:skill FOLDER/NAME` | Any custom folder works |
+| `/rails_skill create NAME` | Agent CLI shorthand to create `stack/NAME` |
 
 ## Directory Structure
 
@@ -55,6 +56,20 @@ rails g rails_skills:skill stack/redis --with-references
 ```
 
 The generator creates the skill in `skills/` and automatically symlinks it into `.claude/skills/` and `.codex/skills/`.
+
+## Agent CLI Shorthand
+
+When an agent CLI sends `/rails_skill create ...`, map it to the Rails generator:
+
+```bash
+# Default category is stack/
+/rails_skill create new_skill
+# -> bin/rails g rails_skills:skill stack/new_skill
+
+# Explicit category/path is passed through
+/rails_skill create services/payments
+# -> bin/rails g rails_skills:skill services/payments
+```
 
 ## Skill File Format
 
